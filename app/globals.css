@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { @apply bg-dark-primary; }
+::-webkit-scrollbar-thumb { @apply bg-brand-orange rounded-full; }
+.light ::-webkit-scrollbar-track { @apply bg-slate-100; }
+
+/* ---- Transitions ---- */
+*, *::before, *::after {
+  @apply transition-colors duration-200;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  @apply font-sans antialiased;
+}
+
+/* ---- Theme colours via CSS vars ---- */
+:root {
+  --orange:      #d97742;
+  --orange-lt:   #e89060;
+  --orange-glow: rgba(217,119,66,0.15);
+  --teal:        #1a8fa0;
+  --teal-lt:     #26b5cc;
+}
+
+/* Dark (default) */
+.dark body {
+  @apply bg-dark-primary text-slate-100;
+}
+/* Light */
+.light body {
+  @apply bg-light-primary text-slate-900;
+}
+
+/* ---- Gradient text ---- */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #d97742, #e89060);
+  }
+  .text-gradient-teal {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #1a8fa0, #26b5cc);
+  }
+
+  /* Grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(26,143,160,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,143,160,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+  .light .bg-grid {
+    background-image:
+      linear-gradient(rgba(26,143,160,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,143,160,0.08) 1px, transparent 1px);
+  }
+
+  /* Card hover glow */
+  .card-glow:hover {
+    box-shadow: 0 0 30px rgba(217,119,66,0.12), 0 8px 40px rgba(0,0,0,0.35);
+  }
+  .light .card-glow:hover {
+    box-shadow: 0 0 20px rgba(217,119,66,0.18), 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  /* Outline text */
+  .text-outline {
+    -webkit-text-stroke: 2px #1a8fa0;
+    color: transparent;
+  }
+
+  /* Section padding */
+  .section-pad { @apply py-24 px-4 sm:px-6; }
+
+  /* Fade in animations */
+  .fade-in-up {
+    animation: fadeUp 0.7s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Typing cursor */
+  .typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: #d97742;
+    margin-left: 2px;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+}
